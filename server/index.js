@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import todoRouter from "./routes/todo.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
@@ -10,6 +11,11 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use("/api/auth", authRouter);
 app.use("/api/todo", todoRouter);

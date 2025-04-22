@@ -1,6 +1,7 @@
 import pool from "../connection/Pool";
 
 export const getTodos = async (req, res) => {
+  console.log(req.rawHeaders);
   try {
     const todos = await pool.query(`SELECT * FROM todos WHERE user_id = $1`, [
       req.userId,
